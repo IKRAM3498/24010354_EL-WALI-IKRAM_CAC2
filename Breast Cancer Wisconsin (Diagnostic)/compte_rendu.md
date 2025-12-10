@@ -139,19 +139,19 @@ X_scaled = scaler.fit_transform(X)
 
 * **Distribution des variables** : histogrammes et boxplots pour détecter outliers
 * <img width="1990" height="3190" alt="image" src="https://github.com/user-attachments/assets/27be4749-7e08-47ba-b944-614f567a2151" />
-#interpritation
+# interpritation
 L'image présente 30 histogrammes montrant la distribution des variables dans un jeu de données d'apprentissage automatique, très probablement standardisées (centrées autour de zéro). Ces variables sont regroupées en trois catégories (_mean, _se, _worst) pour des caractéristiques comme le rayon et la texture. On observe que si les distributions moyennes (_mean) sont presque normales, la majorité des variables (surtout celles d'erreur standard, _se, et les valeurs extrêmes, _worst) sont fortement asymétriques à droite. Cette asymétrie indique une concentration de valeurs faibles avec une longue queue vers les valeurs positives et est courante dans les données d'imagerie médicale, signalant la variabilité des mesures.
 * **Heatmap de corrélations** : détecter les mesures les plus corrélées entre elles et avec le target
 * <img width="1064" height="838" alt="image" src="https://github.com/user-attachments/assets/52f202e7-25d5-49b1-8ec6-532f2650650e" />
-#interpritaion :
+# interpritaion :
 La Matrice de Corrélation (Heatmap) est l'outil le plus informatif, car elle quantifie les relations linéaires entre les variables. Elle révèle que les caractéristiques liées à la taille et à la forme d'une masse, notamment les points concaves, le rayon, le périmètre et la surface (en particulier leurs versions _worst et _mean), sont les meilleurs prédicteurs de la malignité (Diagnosis_M), avec des corrélations positives atteignant près de 0.8. Cependant, la matrice montre également une multicollinéarité extrême : les variables mesurant des propriétés similaires (comme le radius_mean, perimeter_mean, et area_mean) sont presque parfaitement corrélées entre elles (proche de 1.00), indiquant une redondance structurelle qui rendra la plupart des modèles statistiques instables si elles sont toutes incluses.
 * **Scatterplots** : relation features ↔ target
 <img width="1529" height="1189" alt="image" src="https://github.com/user-attachments/assets/61693995-0074-43ce-8fb5-78da03080022" />
-#interpritation :
+# interpritation :
 Synthèse globale : Ces graphiques montrent que les variables de taille et de forme d'une masse (en moyenne, erreur standard, et extrême) sont de bons prédicteurs du diagnostic binaire. Les distributions sont majoritairement asymétriques et contiennent de nombreuses valeurs aberrantes, ce qui est crucial pour le choix du bon modèle de Machine Learning et des étapes de prétraitement.
 **Boxplots pour détecter les outliers**
   <img width="1989" height="3189" alt="image" src="https://github.com/user-attachments/assets/82c2ab15-f130-4c24-baab-ca7fd68c6463" />
-#interpritation 
+# interpritation 
 Les deux figures illustrent la distribution des 30 caractéristiques d'un jeu de données, probablement standardisées. Les histogrammes confirment la forte asymétrie à droite (longue queue vers les valeurs positives) de la majorité des variables, en particulier celles avec les suffixes _se et _worst. Les boîtes à moustaches révèlent une présence significative de valeurs aberrantes (points isolés au-delà des moustaches) dans presque toutes les caractéristiques, ce qui est particulièrement prononcé dans les variables asymétriques. Ces boîtes à moustaches montrent également que la moitié centrale des données (la boîte) est souvent très compressée autour de la médiane (ligne à l'intérieur de la boîte), surtout pour les variables _se, indiquant une faible variabilité pour la majorité des observations et un étalement important causé par ces valeurs aberrantes.
 **Observations :**
 
@@ -221,17 +221,17 @@ for name, model in models.items():
 * Le Recall est crucial : il mesure la capacité du modèle à **détecter correctement les tumeurs malignes**.
 ---
 # 5. matrice de confusion 
-#matrice de confusion logistic regression 
+# matrice de confusion logistic regression 
 <img width="558" height="455" alt="image" src="https://github.com/user-attachments/assets/8ab046f0-0af5-440a-8c87-b64d8a1ba155" />
-#interpritation :
+# interpritation :
 La matrice de confusion évalue la performance du modèle de Régression Logistique et indique qu'il est extrêmement performant pour la classification : sur les 114 cas testés, le modèle a correctement identifié 70 cas bénins et 42 cas malins. Les erreurs sont minimes, avec seulement 1 faux négatif (un cas malin classé à tort comme bénin, l'erreur la plus critique) et 1 faux positif (un cas bénin classé malin). Cela se traduit par une Fidélité (Accuracy) de 98,2% (($\frac{70+42}{70+1+1+42} \approx 0.982$)), un Rappel (Recall) de 97,7% (($\frac{42}{42+1} \approx 0.977$)) et une Précision (Precision) de 97,7% (($\frac{42}{42+1} \approx 0.977$)), confirmant un excellent équilibre entre la capacité du modèle à identifier les vrais malins et à éviter les erreurs de diagnostic.
-#matrice de confusion random forest 
+# matrice de confusion random forest 
 <img width="558" height="455" alt="image" src="https://github.com/user-attachments/assets/65c6eaf0-4a64-4571-bc49-c6bd33d1292d" />
-#interpritation :
+# interpritation :
 La matrice de confusion pour le modèle Random Forest  évalue sa capacité à diagnostiquer correctement les cas. Elle montre que le modèle a fait un excellent travail en identifiant correctement 70 cas bénins (True Negative) et 40 cas malins (True Positive). Cependant, il a fait 4 erreurs au total : 1 faux positif (un cas bénin mal classé malin) et surtout 3 faux négatifs (trois cas malins classés à tort comme bénins). Un taux de 3 faux négatifs est critique dans un contexte médical, car il représente des cas de cancer non détectés. Malgré cela, le modèle conserve une Fidélité (Accuracy) élevée de 96,5% (($\frac{70+40}{70+1+3+40} \approx 0.965$)), indiquant une performance globale très forte.
 # matrice de confusion XGboost
 <img width="558" height="455" alt="image" src="https://github.com/user-attachments/assets/e064d9e3-55ce-4ebb-a67f-5fae0cef34a0" />
-#interpritation :
+# interpritation :
 La matrice de confusion pour le modèle XGBoost présente les résultats les plus précis parmi tous les modèles testés. Elle montre que le modèle a correctement identifié 69 cas bénins (True Negative) et 40 cas malins (True Positive). Il a fait un total de 5 erreurs, soit 2 faux positifs (un cas bénin classé malin) et 3 faux négatifs (trois cas malins classés bénins). En comparant avec la Régression Logistique (1 faux négatif) et le Random Forest (3 faux négatifs), le XGBoost fait légèrement moins bien en termes de faux négatifs critiques, car il échoue à détecter le cancer pour 3 cas. Cependant, sa performance globale reste très élevée avec une Fidélité (Accuracy) de 95,6% (($\frac{69+40}{69+2+3+40} \approx 0.956$)), ce qui est excellent compte tenu de la complexité des données.
 
 
