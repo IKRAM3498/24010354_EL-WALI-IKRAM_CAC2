@@ -222,14 +222,19 @@ for name, model in models.items():
 # 5. matrice de confusion 
 # matrice de confusion logistic regression 
 <img width="558" height="455" alt="image" src="https://github.com/user-attachments/assets/8ab046f0-0af5-440a-8c87-b64d8a1ba155" />
+
 # interpritation :
 La matrice de confusion évalue la performance du modèle de Régression Logistique et indique qu'il est extrêmement performant pour la classification : sur les 114 cas testés, le modèle a correctement identifié 70 cas bénins et 42 cas malins. Les erreurs sont minimes, avec seulement 1 faux négatif (un cas malin classé à tort comme bénin, l'erreur la plus critique) et 1 faux positif (un cas bénin classé malin). Cela se traduit par une Fidélité (Accuracy) de 98,2% (($\frac{70+42}{70+1+1+42} \approx 0.982$)), un Rappel (Recall) de 97,7% (($\frac{42}{42+1} \approx 0.977$)) et une Précision (Precision) de 97,7% (($\frac{42}{42+1} \approx 0.977$)), confirmant un excellent équilibre entre la capacité du modèle à identifier les vrais malins et à éviter les erreurs de diagnostic.
+
 # matrice de confusion random forest 
 <img width="558" height="455" alt="image" src="https://github.com/user-attachments/assets/65c6eaf0-4a64-4571-bc49-c6bd33d1292d" />
+
 # interpritation :
 La matrice de confusion pour le modèle Random Forest  évalue sa capacité à diagnostiquer correctement les cas. Elle montre que le modèle a fait un excellent travail en identifiant correctement 70 cas bénins (True Negative) et 40 cas malins (True Positive). Cependant, il a fait 4 erreurs au total : 1 faux positif (un cas bénin mal classé malin) et surtout 3 faux négatifs (trois cas malins classés à tort comme bénins). Un taux de 3 faux négatifs est critique dans un contexte médical, car il représente des cas de cancer non détectés. Malgré cela, le modèle conserve une Fidélité (Accuracy) élevée de 96,5% (($\frac{70+40}{70+1+3+40} \approx 0.965$)), indiquant une performance globale très forte.
+
 # matrice de confusion XGboost
 <img width="558" height="455" alt="image" src="https://github.com/user-attachments/assets/e064d9e3-55ce-4ebb-a67f-5fae0cef34a0" />
+
 # interpritation :
 La matrice de confusion pour le modèle XGBoost présente les résultats les plus précis parmi tous les modèles testés. Elle montre que le modèle a correctement identifié 69 cas bénins (True Negative) et 40 cas malins (True Positive). Il a fait un total de 5 erreurs, soit 2 faux positifs (un cas bénin classé malin) et 3 faux négatifs (trois cas malins classés bénins). En comparant avec la Régression Logistique (1 faux négatif) et le Random Forest (3 faux négatifs), le XGBoost fait légèrement moins bien en termes de faux négatifs critiques, car il échoue à détecter le cancer pour 3 cas. Cependant, sa performance globale reste très élevée avec une Fidélité (Accuracy) de 95,6% (($\frac{69+40}{69+2+3+40} \approx 0.956$)), ce qui est excellent compte tenu de la complexité des données.
 
