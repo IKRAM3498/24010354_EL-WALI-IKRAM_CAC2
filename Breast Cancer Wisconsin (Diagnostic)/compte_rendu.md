@@ -138,18 +138,22 @@ X_scaled = scaler.fit_transform(X)
 
 * **Distribution des variables** : histogrammes et boxplots pour détecter outliers
 * <img width="1990" height="3190" alt="image" src="https://github.com/user-attachments/assets/27be4749-7e08-47ba-b944-614f567a2151" />
+
 # interpritation
 L'image présente 30 histogrammes montrant la distribution des variables dans un jeu de données d'apprentissage automatique, très probablement standardisées (centrées autour de zéro). Ces variables sont regroupées en trois catégories (_mean, _se, _worst) pour des caractéristiques comme le rayon et la texture. On observe que si les distributions moyennes (_mean) sont presque normales, la majorité des variables (surtout celles d'erreur standard, _se, et les valeurs extrêmes, _worst) sont fortement asymétriques à droite. Cette asymétrie indique une concentration de valeurs faibles avec une longue queue vers les valeurs positives et est courante dans les données d'imagerie médicale, signalant la variabilité des mesures.
 * **Heatmap de corrélations** : détecter les mesures les plus corrélées entre elles et avec le target
 * <img width="1064" height="838" alt="image" src="https://github.com/user-attachments/assets/52f202e7-25d5-49b1-8ec6-532f2650650e" />
+
 # interpritaion :
 La Matrice de Corrélation (Heatmap) est l'outil le plus informatif, car elle quantifie les relations linéaires entre les variables. Elle révèle que les caractéristiques liées à la taille et à la forme d'une masse, notamment les points concaves, le rayon, le périmètre et la surface (en particulier leurs versions _worst et _mean), sont les meilleurs prédicteurs de la malignité (Diagnosis_M), avec des corrélations positives atteignant près de 0.8. Cependant, la matrice montre également une multicollinéarité extrême : les variables mesurant des propriétés similaires (comme le radius_mean, perimeter_mean, et area_mean) sont presque parfaitement corrélées entre elles (proche de 1.00), indiquant une redondance structurelle qui rendra la plupart des modèles statistiques instables si elles sont toutes incluses.
 * **Scatterplots** : relation features ↔ target
 <img width="1529" height="1189" alt="image" src="https://github.com/user-attachments/assets/61693995-0074-43ce-8fb5-78da03080022" />
+
 # interpritation :
 Synthèse globale : Ces graphiques montrent que les variables de taille et de forme d'une masse (en moyenne, erreur standard, et extrême) sont de bons prédicteurs du diagnostic binaire. Les distributions sont majoritairement asymétriques et contiennent de nombreuses valeurs aberrantes, ce qui est crucial pour le choix du bon modèle de Machine Learning et des étapes de prétraitement.
 **Boxplots pour détecter les outliers**
   <img width="1989" height="3189" alt="image" src="https://github.com/user-attachments/assets/82c2ab15-f130-4c24-baab-ca7fd68c6463" />
+  
 # interpritation 
 Les deux figures illustrent la distribution des 30 caractéristiques d'un jeu de données, probablement standardisées. Les histogrammes confirment la forte asymétrie à droite (longue queue vers les valeurs positives) de la majorité des variables, en particulier celles avec les suffixes _se et _worst. Les boîtes à moustaches révèlent une présence significative de valeurs aberrantes (points isolés au-delà des moustaches) dans presque toutes les caractéristiques, ce qui est particulièrement prononcé dans les variables asymétriques. Ces boîtes à moustaches montrent également que la moitié centrale des données (la boîte) est souvent très compressée autour de la médiane (ligne à l'intérieur de la boîte), surtout pour les variables _se, indiquant une faible variabilité pour la majorité des observations et un étalement important causé par ces valeurs aberrantes.
 **Observations :**
@@ -252,7 +256,38 @@ La matrice de confusion pour le modèle XGBoost présente les résultats les plu
 
 ---
 
-## Conclusion
+## Conclusion:
+
+
+### **Résumé général du projet : Prédiction du cancer du sein avec le Machine Learning**
+
+Ce projet avait pour objectif de développer un modèle de machine learning capable de prédire si une tumeur du sein est bénigne ou maligne à partir d’un ensemble de caractéristiques médicales. Les données utilisées proviennent d’un dataset contenant différentes mesures morphologiques extraites d’images numériques des cellules mammaires, telles que le rayon, la texture, le périmètre, la concavité, la compacité et bien d’autres indicateurs cellulaires.
+
+Le projet s’est déroulé en plusieurs étapes essentielles. La première phase a consisté à explorer et préparer les données. Cette exploration a permis de vérifier qu’aucune valeur manquante n’était présente et de comprendre la distribution, les types de variables ainsi que les relations potentielles entre elles. Une analyse descriptive a également permis d'observer les différences statistiques entre les tumeurs bénignes et les tumeurs malignes.
+
+Ensuite, j’ai séparé la base de données en variables explicatives (X) et en une variable cible (y), appelée “target”, indiquant si la tumeur est bénigne ou maligne. Pour assurer une évaluation fiable du modèle, j’ai appliqué la technique du train/test split, en utilisant 80 % des données pour l’entraînement et 20 % pour le test. Le paramètre random_state a été fixé pour garantir la reproductibilité des résultats.
+
+J’ai ensuite entraîné plusieurs modèles de classification, notamment :
+
+* **Régression Logistique**,
+* **Support Vector Machine (SVM)**,
+* **k-Nearest Neighbors (KNN)**,
+* **Random Forest**,
+* **XGBoost**.
+
+L’objectif était d’évaluer et comparer leurs performances pour identifier le modèle le plus performant. Les performances ont été mesurées à l’aide de plusieurs métriques pertinentes dans un contexte médical : l’accuracy, la précision, le rappel (recall), le F1-score, ainsi que la matrice de confusion.
+
+La matrice de confusion a joué un rôle essentiel dans l’analyse, car elle distingue les résultats en quatre catégories :
+
+* **Vrais Positifs (TP)** : le modèle détecte correctement un cas de cancer.
+* **Vrais Négatifs (TN)** : le modèle identifie correctement un cas sain.
+* **Faux Positifs (FP)** : le modèle prédit un cancer alors que le patient est sain.
+* **Faux Négatifs (FN)** : le modèle prédit que le patient est sain alors qu’il est malade.
+
+Dans un contexte médical, les faux négatifs sont les erreurs les plus dangereuses, car ils peuvent retarder le diagnostic et mettre la vie des patients en danger. C’est pourquoi l’indicateur le plus critique pour ce projet est **le recall**, mesurant la capacité du modèle à détecter correctement les cas de cancer.
+
+Après comparaison, le modèle **XGBoost** s’est révélé être le plus performant. Il a offert un excellent rappel, une forte précision, et un équilibre optimal entre toutes les métriques. Une validation croisée a également permis de confirmer sa stabilité et sa robustesse. Les graphiques générés — notamment la matrice de confusion et les courbes des prédictions — ont permis d’obtenir une meilleure interprétation des performances du modèle.
+
 
 1. **Modèles gagnants :** Les modèles basés sur les arbres de décision (Random Forest et XGBoost) surpassent la Logistic Regression.
 2. **Meilleur modèle :** Random Forest, pour sa capacité à détecter correctement les tumeurs malignes et sa précision globale.
