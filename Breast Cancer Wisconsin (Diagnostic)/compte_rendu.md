@@ -3,15 +3,13 @@
 # **24010354**
 <img src="encgs1.jfif" style="height:300px;margin-right:300px; float:left; border-radius:10px;"/>
 
-# Breast Cancer Dataset : [https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data](https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data)
-
----
+# **Date :** 10 Décembre 2025
 
 # Compte rendu
-
 ## Analyse Médicale et Prédiction du Diagnostic par Classification
 
-**Date :** 10 Décembre 2025
+
+# Breast Cancer Dataset : [https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data](https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data)
 
 ---
 
