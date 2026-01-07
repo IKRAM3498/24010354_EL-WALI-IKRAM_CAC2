@@ -1,7 +1,7 @@
 
 # **EL-WALI IKRAM**
 # **24010354**
-<img src="encgs1.jfif" style="height:300px;margin-right:300px; float:left; border-radius:10px;"/>
+<img src="logo.1.png" style="height:300px;margin-right:300px; float:left; border-radius:10px;"/>
 
 # **Date :** 10 Décembre 2025
 
